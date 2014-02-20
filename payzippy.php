@@ -13,7 +13,7 @@ include(dirname(__FILE__).'/config.php');
 
 		$this->name = 'payzippy';
 		$this->tab = 'payments_gateways';
-		$this->version = $config1::CURRENT_VERSION;
+		$this->version = '1.0';
         $this->author = 'PayZippy';
 		$this->currencies = true;
 		$this->currencies_mode = 'radio';
@@ -114,7 +114,7 @@ include(dirname(__FILE__).'/config.php');
                               'selected1' => $selected1,
                               'selected2' => $selected2,
                               ));
-        return $this->display(__FILE__, '/configure/configure_payzippy.tpl');
+        return $this->display(__FILE__, '/views/templates/admin/configure_payzippy.tpl');
 	}	
 
  public function hookdisplayPayment($params)
@@ -141,11 +141,11 @@ include(dirname(__FILE__).'/config.php');
 		$quantity .= $products[$i]['cart_quantity'].",";
 		$product_name .= $products[$i]['name'].",";
 	}
-$product_name = (strlen($product_name) > 100) ? substr($product_name,0,100) : $product_name;
+$product_name = (Tools::strlen($product_name) > 100) ? Tools::substr($product_name,0,100) : $product_name;
 $complete_address = $address->address1." ".$address->address2;
-$complete_address = (strlen($complete_address) > 100) ? substr($complete_address,0,100) : $complete_address;
+$complete_address = (Tools::strlen($complete_address) > 100) ? Tools::substr($complete_address,0,100) : $complete_address;
 $module_version = 'Presta'."/".Configuration::get('PS_INSTALL_VERSION')."|".$config::CURRENT_VERSION;
-$module_version = (strlen($module_version) > 20) ? substr($module_version,0,20) : $module_version;
+$module_version = (Tools::strlen($module_version) > 20) ? Tools::substr($module_version,0,20) : $module_version;
 
 
 if( isset($_SERVER['HTTPS'] )  && $_SERVER['HTTPS'] != 'off' && $_SERVER['HTTPS'] != 'OFF' ){
@@ -179,7 +179,7 @@ $payment_request = 'http://'.htmlspecialchars($_SERVER['HTTP_HOST'], ENT_COMPAT,
 			'payment_button' => Configuration::get('PAYMENT_BUTTON'),
 			'ui_mode' => Configuration::get('UI_MODE')
 		));
-		return $this->display(__FILE__, 'payzippy.tpl');
+		return $this->display(__FILE__, '/views/templates/front/payzippy.tpl');
 	}
     
 
