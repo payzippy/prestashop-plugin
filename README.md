@@ -6,13 +6,13 @@ Tested up to: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Use PayZippy Payment Gateway in your WooCommerce store to accept Debit Cards, Credit Cards, Net Banking and EMI.
+Use PayZippy Payment Gateway in your Prestashop store to accept Debit Cards, Credit Cards, Net Banking and EMI.
 
 == Description ==
 
 **Prestashop PayZippy Payment Gateway**
 
-This is the PayZippy Payment Gateway plugin for your WooCommerce store. Securely accept Debit Cards, Credit Cards, Net Banking and EMI modes of payment.
+This is the PayZippy Payment Gateway plugin for your Prestashop store. Securely accept Debit Cards, Credit Cards, Net Banking and EMI modes of payment.
 
 **Higher Conversions**
 
