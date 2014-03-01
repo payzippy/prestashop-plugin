@@ -38,7 +38,7 @@ Pay less as you grow.
 
 == Installation ==
 
-1. Extract the plugin folder and copy the folder into your modules folder.
+1. Extract the plugin folder, change the folder's name to payzippy, then copy & paste the folder into your modules folder.
 
 2. Log in to your Prestashop admin account and click on the modules menu on the panel.
 
