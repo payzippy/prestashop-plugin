@@ -36,7 +36,7 @@ Tools::redirectLink(__PS_BASE_URI__.'order-detail.php?id_order='.$result['id_ord
 {
 //log hash mismatch
 Logger::addLog('Hash mismatch', 4);
-$payzippy->validateOrder($cart_id[0], _PS_OS_ERROR_, $total, $payzippy->displayName, 'Payment Message: '.$request_params['transaction_response_message']."\nPayment Method: ".$request_params['payment_instrument']."\n", $extra_vars, null, false, false, null);
+$payzippy->validateOrder($cart_id[0], _PS_OS_ERROR_, $total, $payzippy->displayName, 'Payment Message: '.$request_params['transaction_response_message']."\nPayment Method: ".$request_params['payment_instrument']."\nHash Mismatch", $extra_vars, null, false, false, null);
 $result = Db::getInstance()->getRow('SELECT * FROM '._DB_PREFIX_.'orders WHERE id_cart = '.(int)$cart_id[0] );
 Tools::redirectLink(__PS_BASE_URI__.'order-detail.php?id_order='.$result['id_order']);
 }
