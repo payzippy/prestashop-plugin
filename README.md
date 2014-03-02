@@ -1,10 +1,17 @@
-=== Prestashop PayZippy Payment Gateway ===
+== Prestashop PayZippy Payment Gateway ==
+
 Version: 1.0.1
+
 Contributors: payzippy
+
 Tags: Prestashop, PayZippy, Payment Gateway, Debit Card, Credit Card, NetBanking
+
 Requires at least: 1.5
+
 Tested up to: 1.6.2
+
 License: GPLv2 or later
+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Use PayZippy Payment Gateway in your Prestashop store to accept Debit Cards, Credit Cards, Net Banking and EMI.
