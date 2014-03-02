@@ -4,8 +4,8 @@ include(dirname(__FILE__).'/../../config/config.inc.php');
 include(dirname(__FILE__).'/payzippy.php');
 
 $payzippy = new payzippy();
-$request_params = $_REQUEST;
-unset($_REQUEST);
+$request_params = $_GET;
+unset($_GET);
 
 $hash_received = $request_params['hash'];
 $hash_string = '';
@@ -27,7 +27,7 @@ if ($request_params['transaction_response_code'] == 'SUCCESS')
 {
 if ($hash_calculated == $hash_received)
 {
-$payzippy->validateOrder($cart_id[0], _PS_OS_PAYMENT_, $total, $payzippy->displayName, 'Payment Message: '.$request_params['transaction_response_message']."\nPayment Method: ".$request_params['payment_instrument']."\n", $extra_vars, null, false, false, null);
+$payzippy->validateOrder($cart_id[0], _PS_OS_PAYMENT_, $total, $payzippy->displayName, "Payment Successful\nPayZippy Transaction ID: ".$request_params['payzippy_transaction_id']."\nMerchant Transaction ID: ".$request_params['merchant_transaction_id']."\nPayment Message: ".$request_params['transaction_response_message']."\nPayment Method: ".$request_params['payment_instrument']."\nBank Name: ".$request_params['bank_name']."\nFraud Action: ".$request_params['fraud_action']."\nFraud Details: ".$request_params['fraud_details']."\n", $extra_vars, null, false, false, null);
 //To get order_id so that we can pass it in argument and send it to order.php
 $result = Db::getInstance()->getRow('SELECT * FROM '._DB_PREFIX_.'orders WHERE id_cart = '.(int)$cart_id[0] );
 
@@ -36,13 +36,13 @@ Tools::redirectLink(__PS_BASE_URI__.'order-detail.php?id_order='.$result['id_ord
 {
 //log hash mismatch
 Logger::addLog('Hash mismatch', 4);
-$payzippy->validateOrder($cart_id[0], _PS_OS_ERROR_, $total, $payzippy->displayName, 'Payment Message: '.$request_params['transaction_response_message']."\nPayment Method: ".$request_params['payment_instrument']."\nHash Mismatch", $extra_vars, null, false, false, null);
+$payzippy->validateOrder($cart_id[0], _PS_OS_ERROR_, $total, $payzippy->displayName, "Hash Mismatch\nPayZippy Transaction ID: ".$request_params['payzippy_transaction_id']."\nMerchant Transaction ID: ".$request_params['merchant_transaction_id']."\nPayment Message: ".$request_params['transaction_response_message']."\nPayment Method: ".$request_params['payment_instrument']."\nBank Name: ".$request_params['bank_name']."\nFraud Action: ".$request_params['fraud_action']."\nFraud Details: ".$request_params['fraud_details']."\n", $extra_vars, null, false, false, null);
 $result = Db::getInstance()->getRow('SELECT * FROM '._DB_PREFIX_.'orders WHERE id_cart = '.(int)$cart_id[0] );
 Tools::redirectLink(__PS_BASE_URI__.'order-detail.php?id_order='.$result['id_order']);
 }
 } else if ($request_params['transaction_response_code'] != 'SUCCESS')
 {
-$payzippy->validateOrder($cart_id[0], _PS_OS_ERROR_, $total, $payzippy->displayName, 'Payment Message: '.$request_params['transaction_response_message']."\nPayment Method: ".$request_params['payment_instrument']."\n", $extra_vars, null, false, false, null);
+$payzippy->validateOrder($cart_id[0], _PS_OS_ERROR_, $total, $payzippy->displayName, "Payment Failed\nPayZippy Transaction ID: ".$request_params['payzippy_transaction_id']."\nMerchant Transaction ID: ".$request_params['merchant_transaction_id']."\nPayment Message: ".$request_params['transaction_response_message']."\nPayment Method: ".$request_params['payment_instrument']."\nBank Name: ".$request_params['bank_name']."\nFraud Action: ".$request_params['fraud_action']."\nFraud Details: ".$request_params['fraud_details']."\n", $extra_vars, null, false, false, null);
 $result = Db::getInstance()->getRow('SELECT * FROM '._DB_PREFIX_.'orders WHERE id_cart = '.(int)$cart_id[0] );
 Tools::redirectLink(__PS_BASE_URI__.'order-detail.php?id_order='.$result['id_order']);
 }
