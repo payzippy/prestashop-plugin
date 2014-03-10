@@ -1,12 +1,12 @@
-{if $error!=0}
+{if $configure['error']!=0}
 <div class="error">
-    {foreach $error_name as $err}
+    {foreach $configure['error_name'] as $err}
               <img src="../img/admin/nav-logout.gif" alt="Confirmation" />{$err} <br/>
     {/foreach}
 </div>
 {/if}
 
-{if $settings_updated==1}
+{if $configure['settings_updated']==1}
 <div class="conf confirm">
       <img src="../img/admin/ok.gif" alt="Confirmation" />
   Settings updated
@@ -92,22 +92,23 @@
       </div>
     </div>
     <div class="cred-frm-wr">
-      <form action="{$URI}" method="post" class="cred-frm">
-        <div class="mid-wr pull-left"><label for="MID" class="frm-lbl">MID</label><input type="text" class="frm-elem" name="merchant_id" value="{$merchant_id}" /></div>
-        <div class="keyid-wr pull-left"><label for="KeyID" class="frm-lbl">Key ID</label><input type="text" class="frm-elem" name="merchant_key_id" value="{$merchant_key_id}"/></div>
-        <div class="apikey-wr pull-left"><label for="APIKey" class="frm-lbl">API Key</label><input type="text" class="frm-elem more-width" name="secretkey" value="{$secret_key}" autocomplete="off"/></div></br></br></br></br> 
+      <form action="{$configure['URI']}" method="post" class="cred-frm">
+        <div class="mid-wr pull-left"><label for="MID" class="frm-lbl">MID</label><input type="text" class="frm-elem" name="merchant_id" value="{$configure['merchant_id']}" /></div>
+        <div class="keyid-wr pull-left"><label for="KeyID" class="frm-lbl">Key ID</label><input type="text" class="frm-elem" name="merchant_key_id" value="{$configure['merchant_key_id']}"/></div>
+        <div class="apikey-wr pull-left"><label for="APIKey" class="frm-lbl">API Key</label><input type="text" class="frm-elem more-width" name="secretkey" value="{$configure['secret_key']}" autocomplete="off"/></div></br></br></br></br> 
         <label class="choose-lbl-txt">&nbsp;Choose the PayZippy label that you want to display in front end.</label>
       </br></br>
-        <div class="pay_1-wr pull-left"><input type="radio" class="radio-btn-pay" name="payment_button" value="Paybutton-1" {$checked1} checked/><img src="{$module_template_dir}img/Paybutton-1.png" alt="PAYZIPPY" class="radio-btn-image" /></div>
-        <div class="pay_2-wr pull-left"> <input type="radio" name="payment_button" value="Paybutton-2" {$checked2}/><img src="{$module_template_dir}img/Paybutton-2.png" alt="PAYZIPPY" class="radio-btn-image" /></div>
-        <div class="pay_3-wr pull-left"> <input type="radio" name="payment_button" value="Paybutton-3" {$checked3}/><img src="{$module_template_dir}img/Paybutton-3.png" alt="PAYZIPPY" class="radio-btn-image" /></div>
-        <div class="pay_4-wr pull-left"> <input type="radio" name="payment_button" value="Paybutton-4" {$checked4}/><img src="{$module_template_dir}img/Paybutton-4.png" alt="PAYZIPPY" class="radio-btn-image" /></div>
-        <div class="pay_5-wr pull-left"> <input type="radio" name="payment_button" value="Paybutton-5" {$checked5}/><img src="{$module_template_dir}img/Paybutton-5.png" alt="PAYZIPPY" class="radio-btn-image" /></div></br></br></br></br></br>
+
+        <div class="pay_1-wr pull-left"><input type="radio" class="radio-btn-pay" name="payment_button" value="Paybutton-1" {if $configure['paybutton'] == 'Paybutton-1'} checked {/if} checked/><img src="{$module_template_dir}img/Paybutton-1.png" alt="PAYZIPPY" class="radio-btn-image" /></div>
+        <div class="pay_2-wr pull-left"> <input type="radio" name="payment_button" value="Paybutton-2" {if $configure['paybutton'] == 'Paybutton-2'} checked {/if}/><img src="{$module_template_dir}img/Paybutton-2.png" alt="PAYZIPPY" class="radio-btn-image" /></div>
+        <div class="pay_3-wr pull-left"> <input type="radio" name="payment_button" value="Paybutton-3" {if $configure['paybutton'] == 'Paybutton-3'} checked {/if}/><img src="{$module_template_dir}img/Paybutton-3.png" alt="PAYZIPPY" class="radio-btn-image" /></div>
+        <div class="pay_4-wr pull-left"> <input type="radio" name="payment_button" value="Paybutton-4" {if $configure['paybutton'] == 'Paybutton-4'} checked {/if}/><img src="{$module_template_dir}img/Paybutton-4.png" alt="PAYZIPPY" class="radio-btn-image" /></div>
+        <div class="pay_5-wr pull-left"> <input type="radio" name="payment_button" value="Paybutton-5" {if $configure['paybutton'] == 'Paybutton-5'} checked {/if}/><img src="{$module_template_dir}img/Paybutton-5.png" alt="PAYZIPPY" class="radio-btn-image" /></div></br></br></br></br></br>
         <label class="choose-lbl-ui">&nbsp;Choose your UI mode:&nbsp; </label>
         <div class="ui_1-wr" style="float:left;">
         <select name="ui_mode">
-        <option value="REDIRECT" {$selected1}>REDIRECT</option>
-        <option value="IFRAME" {$selected2}>IFRAME</option>
+        <option value="REDIRECT" {if $configure['uimode'] == 'REDIRECT'}selected{/if}>REDIRECT</option>
+        <option value="IFRAME" {if $configure['uimode'] == 'IFRAME'}selected{/if}>IFRAME</option>
         </select></div>
         <div class="sub-wr"><input type="submit" value="Submit" class="pay-btn" name="update_settings"  /></div>
         
