@@ -18,5 +18,6 @@ const CURRENT_VERSION = '1.0.2';
 const VERIFY_SSL_CERTS = true;
 const DESCRIPTION = 'Accepts payments by PayZippy';
 const HASH_METHOD = 'SHA256';
+const PAYMENT_METHOD = 'PAYZIPPY';
 }
 ?>
