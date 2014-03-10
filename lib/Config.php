@@ -17,5 +17,6 @@ final class PZ_Config
     const API_REFUND = "refund";
     const API_VERSION = "v1";
     const VERIFY_SSL_CERTS = TRUE;
+
 }
 ?>

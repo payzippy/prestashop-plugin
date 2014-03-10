@@ -409,7 +409,7 @@ class ChargingRequest
             return $return_obj;
         }
 
-        if ($this->invalid_positive_number(PZ_Constants::PARAMETER_TRANSACTION_AMOUNT)) {
+        if ($this->params[PZ_Constants::PARAMETER_TRANSACTION_AMOUNT] <= 0) {
             $return_obj["message"] = PZ_Constants::INVALID_TRANSACTION_AMOUNT;
             return $return_obj;
         }
@@ -547,14 +547,13 @@ class ChargingRequest
 
         $this->params = PZ_Utils::params_filter($this->params);
         
-        /*$validate_result = $this->validate();
+        $validate_result = $this->validate();
         
         if (empty($validate_result['status'])) {
             $response["error_message"] = $validate_result['message'];
             return $response;
         }
-        */
- 
+        
         $hash = PZ_Utils::generate_hash($this->params);
         $this->set_hash($hash);
 

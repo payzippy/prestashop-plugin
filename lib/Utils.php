@@ -38,7 +38,7 @@ class PZ_Utils
         $hash_method = $params[PZ_Constants::PARAMETER_HASH_METHOD];
 
         $str = self::flatten_array($params);
-        $str .= PZ_Config::SECRET_KEY;
+        $str .= Configuration::get('SECRET_KEY');
         return hash(strtolower($hash_method), $str);
     }
 

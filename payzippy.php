@@ -120,10 +120,10 @@ class payzippy extends PaymentModule {
         $ps_charging->set_buyer_email_address($email_address)
                 ->set_merchant_id(trim(Configuration::get('MERCHANT_ID')))
                 ->set_merchant_key_id(Configuration::get('MERCHANT_KEY_ID'))
-                ->set_transaction_type('SALE')
+                ->set_transaction_type($config::TRANSACTION_TYPE)
                 ->set_ui_mode(Configuration::get('UI_MODE'))
-                ->set_hash_method('SHA256')
-                ->set_currency('INR')
+                ->set_hash_method($config::HASH_METHOD)
+                ->set_currency($config::CURRENCY)
                 ->set_buyer_unique_id($customer->secure_key)
                 ->set_buyer_phone_no($address->phone_mobile)
                 ->set_billing_name($address->firstname . ' ' . $address->lastname)
@@ -133,13 +133,17 @@ class payzippy extends PaymentModule {
                 ->set_shipping_zip($address->postcode)
                 ->set_merchant_transaction_id($cartId . '||' . date('his') )
                 ->set_transaction_amount($Amount)
-                ->set_payment_method('PAYZIPPY')
+                ->set_payment_method($config::PAYMENT_METHOD)
                 ->set_callback_url($redirect_url)
                 ->set_product_info1(trim($product_name, ","))
                 ->set_source($module_version)
                 ->set_item_total(trim($quantity, ","))
-                ->set_udf1($customer->secure_key)
-                ->charge();
+                ->set_udf1($customer->secure_key);
+                  $validation = $ps_charging->charge();
+if(!$validation['status'] == 'OK'){
+    echo 'Error in PayZippy Validation:'.$validation['error_message'];
+    return;
+}
 
         //$hash_get = $ps_charging->get_hash();
         $request_url = $ps_charging->get_request_url();
