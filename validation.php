@@ -8,8 +8,8 @@ require_once(dirname(__FILE__) . '/config.php');
 $payzippy = new payzippy();
 $myconfig = new my_config();
 
-$request_params = $_GET;
-unset($_GET);
+$request_params = $_POST;
+unset($_POST);
 
 $hash_received = $request_params['hash'];
 $hash_string = '';
