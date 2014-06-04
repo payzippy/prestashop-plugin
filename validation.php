@@ -20,7 +20,7 @@ foreach ($request_params as $key => $value)
 
 Logger::addLog($hash_string, 1);
 $hash_string = $hash_string . Configuration::get('SECRET_KEY');
-$hash_calculated = hash($myconfig::HASH_METHOD, $hash_string);
+$hash_calculated = hash($myconfig->HASH_METHOD, $hash_string);
 
 $total = $request_params['transaction_amount'] / 100;
 $cart_id = explode('||', $request_params['merchant_transaction_id']);
