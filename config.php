@@ -1,6 +1,6 @@
 <?php
 
-class my_config
+final class my_config
 {
 const MERCHANT_ID = '';
 const TRANSACTION_TYPE = 'SALE';
