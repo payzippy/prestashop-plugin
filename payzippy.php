@@ -117,28 +117,28 @@ class payzippy extends PaymentModule {
         }
 
         $ps_charging = new ChargingRequest();
-        $ps_charging->set_buyer_email_address($email_address)
+        $ps_charging->set_buyer_email_address(trim($email_address))
                 ->set_merchant_id(trim(Configuration::get('MERCHANT_ID')))
                 ->set_merchant_key_id(Configuration::get('MERCHANT_KEY_ID'))
                 ->set_transaction_type($config::TRANSACTION_TYPE)
                 ->set_ui_mode(Configuration::get('UI_MODE'))
                 ->set_hash_method($config::HASH_METHOD)
                 ->set_currency($config::CURRENCY)
-                ->set_buyer_unique_id($customer->secure_key)
-                ->set_buyer_phone_no($address->phone_mobile)
-                ->set_billing_name($address->firstname . ' ' . $address->lastname)
-                ->set_shipping_address($complete_address)
-                ->set_shipping_city($address->city)
-                ->set_shipping_country($address->country)
-                ->set_shipping_zip($address->postcode)
+                ->set_buyer_unique_id(trim($customer->secure_key))
+                ->set_buyer_phone_no(trim($address->phone_mobile))
+                ->set_billing_name(trim($address->firstname) . ' ' . trim($address->lastname))
+                ->set_shipping_address(trim($complete_address))
+                ->set_shipping_city(trim($address->city))
+                ->set_shipping_country(trim($address->country))
+                ->set_shipping_zip(trim($address->postcode))
                 ->set_merchant_transaction_id($cartId . '||' . date('his') )
-                ->set_transaction_amount($Amount)
+                ->set_transaction_amount(trim($Amount))
                 ->set_payment_method($config::PAYMENT_METHOD)
                 ->set_callback_url($redirect_url)
                 ->set_product_info1(trim($product_name, ","))
                 ->set_source($module_version)
                 ->set_item_total(trim($quantity, ","))
-                ->set_udf1($customer->secure_key);
+                ->set_udf1(trim($customer->secure_key));
                   $validation = $ps_charging->charge();
 if(!$validation['status'] == 'OK'){
     echo 'Error in PayZippy Validation:'.$validation['error_message'];
